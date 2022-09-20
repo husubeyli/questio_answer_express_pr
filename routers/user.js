@@ -1,10 +1,13 @@
 const express = require('express');
 
 const router = express.Router();
-const { getUser } = require('../controllers/user')
+const { getUser, getAllUsers } = require('../controllers/user');
+const { checkUserExist } = require('../middlewares/database/databaseErrorHelpers');
 
 
-router.get('/:id', getUser)
+
+router.get('/', getAllUsers)
+router.get('/:id',checkUserExist,  getUser)
 
 
 
