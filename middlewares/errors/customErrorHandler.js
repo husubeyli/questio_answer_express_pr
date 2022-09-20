@@ -6,7 +6,7 @@ const customErrorHandler = (err, req, res, next) => {
 
     
 
-    console.log(err.name, 'adi ')
+    // console.log(err.name, 'adi ')
     if (err.name === 'SyntaxError') {
         customError = new CustomError('Unexpected Syntax', 400)
     }
