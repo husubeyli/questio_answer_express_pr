@@ -8,11 +8,12 @@ const {
 
 
 // api/questions
-const { askNewQuestion } = require('../controllers/question')
+const { askNewQuestion, getAllQuestions } = require('../controllers/question')
 
 
 
-router.post('/ask', getAccessToRoute, askNewQuestion)
+router.get('/', getAccessToRoute, getAllQuestions)
+router.post('/ask', getAccessToRoute, askNewQuestion);
 
 
 module.exports = router

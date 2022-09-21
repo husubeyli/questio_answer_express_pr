@@ -24,14 +24,21 @@ const askNewQuestion = asyncErrorWrapper(async (req, res, next) => {
 });
 
 
-module.exports = {
-    askNewQuestion
-}
+const getAllQuestions = asyncErrorWrapper(async (req, res, next) => {
+    const questions = await Question.find()
+
+    return res.status(200)
+    .json({
+        success: true,
+        data: questions
+    })
+})
 
 
 
 
 
 module.exports = {
-    askNewQuestion
+    askNewQuestion,
+    getAllQuestions
 };
