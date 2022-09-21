@@ -1,7 +1,7 @@
 const asyncErrorWrapper = require('express-async-handler');
 const CustomError = require('../../helpers/error/CustomError')
 
-const User = require('../../models/user.js')
+const User = require('../../models/User.js')
 
 
 const checkUserExist = asyncErrorWrapper(async (req, res, next) => {

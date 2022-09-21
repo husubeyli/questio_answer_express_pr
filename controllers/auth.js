@@ -5,7 +5,7 @@ const crypto = require('crypto');
 const CustomError = require('../helpers/error/CustomError');
 const { sendJwtToClient } = require('../helpers/authorization/tokenHelpers');
 const { validateUserInput, comparePassword } = require('../helpers/input/inputHelpers');
-const User = require('../models/user');
+const User = require('../models/User');
 const {
     requestPasswordReset,
     resetPassword,

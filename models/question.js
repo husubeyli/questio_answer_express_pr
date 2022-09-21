@@ -19,7 +19,7 @@ const QuestionSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    User: {
+    user: {
         type: mongoose.Schema.ObjectId,
         required: true,
         ref: "User"

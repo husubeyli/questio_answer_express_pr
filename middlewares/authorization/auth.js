@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const asyncErrorWrapper = require('express-async-handler');
 const { isTokenIncluded, getAccessTokenFromHeader } = require('../../helpers/authorization/tokenHelpers');
 const req = require('express/lib/request');
-const User = require('../../models/user')
+const User = require('../../models/User')
 
 
 
