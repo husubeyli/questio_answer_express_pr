@@ -59,7 +59,6 @@ const resetPassword = async (userId, token, password, next) => {
     //     { password: password },
     //     { new: true }
     // );
-    console.log(password, 'jakaml');
     const user = await User.findById({ _id: userId });
     user.password = password;
     user._id = userId; 
