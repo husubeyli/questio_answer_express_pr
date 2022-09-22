@@ -28,7 +28,6 @@ const QuestionSchema = new Schema({
 
 
 QuestionSchema.pre('save', function(next) {
-    console.log(this.title);
     if(!this.isModified('title')) {
         next();
     };
