@@ -64,6 +64,19 @@ const editQuestion = asyncErrorWrapper(async (req, res, next) => {
 });
 
 
+const deleteQuestion = asyncErrorWrapper(async (req, res, next) => {
+    const { id } = req.params;
+    // const question = await Question.findById(id);
+    // question.remove()
+    await Question.findByIdAndDelete(id)
+
+    return res.status(200)
+    .json({
+        success: true,
+        message: 'Question Deleted Successfully'
+    })
+});
+
 
 
 
@@ -71,5 +84,6 @@ module.exports = {
     askNewQuestion,
     getAllQuestions,
     getQuestion,
-    editQuestion
+    editQuestion,
+    deleteQuestion
 };

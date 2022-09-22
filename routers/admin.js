@@ -20,7 +20,7 @@ router.use([getAccessToRoute, getAdminAccess])
 
 router.get('/block/:id',checkUserExist, blockUser);
 
-router.delete('/user/:id',checkUserExist,deleteUser);
+router.delete('/user/:id',checkUserExist, deleteUser);
 
 
 
