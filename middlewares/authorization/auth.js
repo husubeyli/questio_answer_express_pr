@@ -7,9 +7,6 @@ const Question = require('../../models/Question')
 
 
 
-
-
-
 const getAccessToRoute = (req, res, next) => {
 
     if( !isTokenIncluded(req) ) {
@@ -24,7 +21,6 @@ const getAccessToRoute = (req, res, next) => {
             id: decoded.id,
             name: decoded.name,
         }
-        // console.log(decoded);
         next();
     }); 
     
@@ -42,10 +38,9 @@ const getAdminAccess = asyncErrorWrapper(async (req, res, next) => {
 
 const getQuestionOwnerAccess = asyncErrorWrapper(async (req, res, next) => {
     const userId = req.user.id;
-    console.log(id, 'istidecinin idsi');
     const questionId = req.params.id;
-
-    if(questionId != userId) {
+    const question = await Question.findById(questionId)
+    if(question.user != userId) {
         return next(new CustomError('Only owner can handle this operation!', 403))
     }
     next();
