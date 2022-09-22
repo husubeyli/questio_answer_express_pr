@@ -1,10 +1,5 @@
 const asyncErrorWrapper = require('express-async-handler');
-const CustomError = require('../helpers/error/CustomError');
-
-const User = require('../models/User');
 const Question = require('../models/Question');
-const { sys } = require('typescript');
-
 
 
 const askNewQuestion = asyncErrorWrapper(async (req, res, next) => {
