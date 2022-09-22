@@ -10,13 +10,14 @@ const { checkQuestionExist } = require('../middlewares/database/databaseErrorHel
 
 // api/questions
 const { 
-    askNewQuestion, getAllQuestions, getQuestion, editQuestion, deleteQuestion, likeQuestion
+    askNewQuestion, getAllQuestions, getQuestion, editQuestion, deleteQuestion, likeQuestion, dislikeQuestion
 } = require('../controllers/question')
 
 
 
 router.get('/', getAccessToRoute, getAllQuestions)
-router.get('/likes/:id', [getAccessToRoute, checkQuestionExist], likeQuestion)
+router.get('/like/:id', [getAccessToRoute, checkQuestionExist], likeQuestion)
+router.get('/dislike/:id', [getAccessToRoute, checkQuestionExist], dislikeQuestion)
 router.get('/:id', checkQuestionExist, getQuestion)
 router.post('/ask', getAccessToRoute, askNewQuestion);
 router.put('/edit/:id', [getAccessToRoute, checkQuestionExist, getQuestionOwnerAccess], editQuestion);

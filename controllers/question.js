@@ -98,6 +98,26 @@ const likeQuestion = asyncErrorWrapper(async (req, res, next) => {
     });
 });
 
+const dislikeQuestion = asyncErrorWrapper(async (req, res, next) => {
+    const { id } = req.params;
+    const userId = req.user.id;
+    const question = await Question.findById(id);
+
+    if(!question.likes.includes(userId)) {
+        return next(new CustomError(`You don't like this question anymore!`, 400));
+    };
+
+    const index = question.likes.indexOf(userId)
+    question.likes.splice(index, 1);
+    await question.save();
+
+    return res.status(200)
+    .json({
+        success: true,
+        data: question
+    });
+});
+
 
 
 
@@ -107,5 +127,6 @@ module.exports = {
     getQuestion,
     editQuestion,
     deleteQuestion,
-    likeQuestion
+    likeQuestion,
+    dislikeQuestion
 };
