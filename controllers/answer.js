@@ -32,6 +32,27 @@ const askNewAnswerToQuestion = asyncErrorWrapper(async (req, res, next) => {
 });
 
 
+const getAllAnswersByQuestion = asyncErrorWrapper(async (req, res, next) => {
+    const { question_id } = req.params;
+
+    const question = await Question.findById(question_id).populate('answers')
+
+    return res.status(200)
+    .json({
+        success: true,
+        count: question.answers.length,
+        data: question.answers
+    })
+
+});
+
+// const getAnswerByQuestion = askNewAnswerToQuestion(async (req, res, next) => {
+//     const { answersId } = req.params;
+
+// });
+
 module.exports = {
-    askNewAnswerToQuestion
+    askNewAnswerToQuestion,
+    // getAnswerByQuestion,
+    getAllAnswersByQuestion
 }
