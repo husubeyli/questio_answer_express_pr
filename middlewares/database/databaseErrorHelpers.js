@@ -3,6 +3,7 @@ const CustomError = require('../../helpers/error/CustomError')
 
 const User = require('../../models/User.js')
 const Question = require('../../models/Question.js')
+const Answer = require('../../models/Answer')
 
 
 const checkUserExist = asyncErrorWrapper(async (req, res, next) => {
@@ -33,7 +34,26 @@ const checkQuestionExist = asyncErrorWrapper(async (req, res, next) => {
 });
 
 
+const checkQuestionAndAnswerExist = asyncErrorWrapper(async (req, res, next) => {
+    
+    const question_id  = req.params.question_id;
+    const answer_id = req.params.answer_id;
+
+    const answer = await Answer.findOne({
+        _id: answer_id,
+        question: question_id
+    });
+
+    if(!answer) {
+        return next(new CustomError('There is no answer with that id associatedw with question id', 400))
+
+    }
+    next()
+});
+
+
 module.exports = {
     checkUserExist,
-    checkQuestionExist
+    checkQuestionExist,
+    checkQuestionAndAnswerExist
 };

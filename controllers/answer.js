@@ -1,7 +1,6 @@
 const asyncErrorWrapper = require('express-async-handler');
 const CustomError = require('../helpers/error/CustomError');
 
-const User = require('../models/User');
 const Question = require('../models/Question');
 const Answer = require('../models/Answer');
 
@@ -46,13 +45,34 @@ const getAllAnswersByQuestion = asyncErrorWrapper(async (req, res, next) => {
 
 });
 
-// const getAnswerByQuestion = askNewAnswerToQuestion(async (req, res, next) => {
-//     const { answersId } = req.params;
+const getAnswerByQuestion = asyncErrorWrapper(async (req, res, next) => {
+    const { answer_id } = req.params;
 
-// });
+    const answer = await Answer
+    .findById(answer_id)
+    .populate(
+        {
+            path: 'question',
+            select: 'title'
+        }
+    )
+    .populate(
+        {
+            path: 'user',
+            select: 'name email'
+        }
+    )
+
+    return res.status(200)
+    .json({
+        success: true,
+        data: answer
+    })
+    
+});
 
 module.exports = {
     askNewAnswerToQuestion,
-    // getAnswerByQuestion,
+    getAnswerByQuestion,
     getAllAnswersByQuestion
 }
