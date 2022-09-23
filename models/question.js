@@ -30,7 +30,7 @@ const QuestionSchema = new Schema({
             ref: 'User'
         }
     ],
-    answer: [
+    answers: [
         {
             type: mongoose.Schema.ObjectId,
             ref: 'Answer'
