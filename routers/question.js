@@ -26,7 +26,7 @@ router.put('/edit/:id', [getAccessToRoute, checkQuestionExist, getQuestionOwnerA
 router.delete('/delete/:id', [getAccessToRoute, checkQuestionExist, getQuestionOwnerAccess], deleteQuestion);
 
 // for answer controller 
-router.use('/:id/answers', checkQuestionExist, answer)
+router.use('/:question_id/answers', checkQuestionExist, answer)
 
 
 module.exports = router
