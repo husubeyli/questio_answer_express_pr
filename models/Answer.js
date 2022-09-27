@@ -39,7 +39,7 @@ AnswerSchema.pre('save',async function(next) {
     try {    
         const question = await Question.findById(this.question);
         question.answers.push(this._id)
-
+        
         await question.save();
         next()
     }

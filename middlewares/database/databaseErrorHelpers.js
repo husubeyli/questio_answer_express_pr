@@ -45,7 +45,7 @@ const checkQuestionAndAnswerExist = asyncErrorWrapper(async (req, res, next) => 
     });
 
     if(!answer) {
-        return next(new CustomError('There is no answer with that id associatedw with question id', 400))
+        return next(new CustomError('There is no answer with that id associatede with question id', 400))
 
     }
     next()
