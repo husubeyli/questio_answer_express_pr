@@ -27,10 +27,10 @@ const checkQuestionExist = asyncErrorWrapper(async (req, res, next) => {
 
     if(!question) {
         return next(new CustomError('There is no question with this id'))
-    }
+    };
     req.data = question;
 
-    next()
+    next();
 });
 
 
@@ -47,8 +47,8 @@ const checkQuestionAndAnswerExist = asyncErrorWrapper(async (req, res, next) => 
     if(!answer) {
         return next(new CustomError('There is no answer with that id associatede with question id', 400))
 
-    }
-    next()
+    };
+    next();
 });
 
 
