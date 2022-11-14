@@ -66,7 +66,19 @@ const getAllQuestions = asyncErrorWrapper(async (req, res, next) => {
         };
     };
 
+    // sort: req.query.sortBy = most-liked, most-answered
+    const sortKey = req.query.sortBy;
 
+    if( sortKey === "most-answered" ){
+        query = query.sort("-answerCount -createdAt") // when answerCount the same sorting -createdAt
+    };
+
+    if( sortKey === "most-liked" ){
+        query.sort('-likeCount -createdAt') // when likeCount the same sorting -createdAt
+    } 
+    else {
+        query = query.sort('-createdAt')
+    }
 
     query = query.skip(startIndex).limit(limit)
 
