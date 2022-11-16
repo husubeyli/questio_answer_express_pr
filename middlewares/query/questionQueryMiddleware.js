@@ -1,5 +1,4 @@
 const asyncErrorWrapper = require('express-async-handler');
-const { populate } = require('../../models/Question');
 const { searchHelper, populateHelper, questionSortHelper, paginationHelper } = require('./queryMiddlewareHelpers');
 
 
@@ -9,7 +8,7 @@ const questionQueryMiddleware = function(model, options) {
         // Initial query
         let query = model.find();
 
-        // Search
+        // search by name
         query = searchHelper('title', query, req)
 
         if ( options && options.population) {

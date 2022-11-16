@@ -8,7 +8,7 @@ const User = require('../models/User');
 const getUser = asyncErrorWrapper(async (req, res, next) => {
     const { id } = req.params;
 
-    const user = await User.findById(id);
+    const user = await User.findById(id); // middleware de user gonderdiyim ucun istifade elemirem bu fieldi burda req.data-n lazim olan user gelir
     
     return res.status(200)
     .json({
@@ -19,16 +19,7 @@ const getUser = asyncErrorWrapper(async (req, res, next) => {
 });
 
 const getAllUsers = asyncErrorWrapper(async (req, res, next) => {
-    const listUsers = await User.find()
-    if (!listUsers) {
-        return next(new CustomError('Users list is empty'))
-    };
-
-    return res.status(200)
-    .json({
-        success: true,
-        data: listUsers
-    })
+    return res.status(200).json(res.queryResults)
 })
 
 module.exports = {
