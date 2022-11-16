@@ -14,6 +14,7 @@ const {
 const answer = require("./answer.js");
 
 const questionQueryMiddleware = require("../middlewares/query/questionQueryMiddleware");
+const answerQueryMiddleware = require('../middlewares/query/answerQueryMiddleware')
 const Question = require("../models/Question")
 
 
@@ -28,7 +29,18 @@ router.get("/", questionQueryMiddleware(Question,{
 }), getAllQuestions);
 router.get("/like/:id", [getAccessToRoute, checkQuestionExist], likeQuestion);
 router.get("/dislike/:id", [getAccessToRoute, checkQuestionExist], dislikeQuestion);
-router.get("/:id", checkQuestionExist, getQuestion);
+router.get("/:id", checkQuestionExist, answerQueryMiddleware(Question, {
+    population: [
+        {
+            path: "user",
+            select: "name profile_image"
+        },
+        {
+            path: "answers",
+            select: "content"
+        }
+    ]
+}), getQuestion);
 router.post("/ask", getAccessToRoute, askNewQuestion);
 router.put("/edit/:id", [getAccessToRoute, checkQuestionExist, getQuestionOwnerAccess], editQuestion);
 router.delete("/delete/:id", [getAccessToRoute, checkQuestionExist, getQuestionOwnerAccess], deleteQuestion);

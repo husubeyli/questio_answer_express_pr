@@ -29,7 +29,7 @@ const questionSortHelper = (query, req) => {
 };
 
 
-const paginationHelper = async (model, query, req) => {
+const paginationHelper = async (totalDocuments, query, req) => {
     // Pagination
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 5;
@@ -37,7 +37,7 @@ const paginationHelper = async (model, query, req) => {
     const endIndex = page * limit;
 
     const pagination = {};
-    const total = await model.countDocuments()
+    const total = totalDocuments;
 
     if( startIndex > 0 ) {
         pagination.previous = {
@@ -45,18 +45,19 @@ const paginationHelper = async (model, query, req) => {
             limit: limit
         };
     };
-
+    // console.log(endIndex, total, startIndex, 'salam');
     if ( endIndex < total ) {
         pagination.next = {
             page: page + 1,
             limit: limit
         };
     };
-    query = query.skip(startIndex).limit(limit)
 
     return {
-        query: query,
-        pagination: pagination
+        query: query === undefined ? undefined : query,
+        pagination: pagination,
+        startIndex,
+        limit
     }
 };
 

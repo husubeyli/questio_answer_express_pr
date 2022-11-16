@@ -27,13 +27,7 @@ const getAllQuestions = asyncErrorWrapper(async (req, res, next) => {
 
 
 const getQuestion = asyncErrorWrapper(async (req, res, next) => {
-    const { id } = req.params;
-
-    return res.status(200)
-    .json({
-        success: true,
-        data: req.data
-    });
+    return res.status(200).json(res.queryResults);
 });
 
 
